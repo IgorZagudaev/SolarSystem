@@ -1,1 +1,247 @@
 @import "tailwindcss";
+
+@theme {
+  --font-display: "Unbounded", "Manrope", sans-serif;
+  --font-body: "Manrope", "Segoe UI", sans-serif;
+  --color-space-950: #05080f;
+  --color-space-900: #0a1120;
+  --color-space-800: #111b30;
+  --color-ink-100: #e8eef7;
+  --color-ink-400: #8fa3bd;
+  --color-solar-300: #ffd98a;
+  --color-solar-400: #f5b942;
+  --color-solar-500: #e89b24;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-space-950);
+  color: var(--color-ink-100);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- звёздное небо ---------- */
+.star {
+  position: absolute;
+  border-radius: 9999px;
+  background: #dbe7f5;
+  animation: twinkle var(--tw-dur, 4s) ease-in-out var(--tw-delay, 0s) infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: var(--tw-max, 0.85);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.12;
+    transform: scale(0.65);
+  }
+}
+
+.shooting-star {
+  position: absolute;
+  width: 130px;
+  height: 1.5px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(214, 231, 255, 0.9));
+  filter: drop-shadow(0 0 6px rgba(190, 215, 255, 0.8));
+  opacity: 0;
+  transform: rotate(-24deg);
+  animation: shoot 11s linear infinite;
+}
+.shooting-star.s2 {
+  animation-duration: 17s;
+  animation-delay: 6s;
+}
+
+@keyframes shoot {
+  0%, 91% {
+    opacity: 0;
+    transform: translate(0, 0) rotate(-24deg);
+  }
+  93% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-46vw, 22vw) rotate(-24deg);
+  }
+}
+
+/* ---------- SVG-сцена ---------- */
+.orbit-line {
+  fill: none;
+  stroke: #7d99bd;
+  stroke-opacity: 0.16;
+  transition: stroke-opacity 0.35s ease, stroke 0.35s ease, stroke-width 0.35s ease;
+}
+.orbit-line.hot {
+  stroke-opacity: 0.65;
+  stroke-width: 1.4;
+}
+
+.body-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  fill: #c7d8ec;
+  paint-order: stroke;
+  stroke: rgba(5, 8, 15, 0.75);
+  stroke-width: 3px;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.sun-corona {
+  transform-origin: 800px 500px;
+  animation: corona 5.5s ease-in-out infinite;
+}
+@keyframes corona {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.09);
+  }
+}
+
+.sun-spin {
+  transform-origin: 800px 500px;
+  animation: spin 90s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.halo-ring {
+  fill: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: halo 2.2s ease-out infinite;
+}
+@keyframes halo {
+  0% {
+    transform: scale(0.82);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+.hit-area {
+  cursor: pointer;
+}
+.hit-area:hover + .planet-core,
+.planet-core.hovered {
+  filter: url(#bodyGlow);
+}
+
+/* ---------- панель данных ---------- */
+.panel-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(143, 163, 189, 0.35) transparent;
+}
+.panel-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.panel-scroll::-webkit-scrollbar-thumb {
+  background: rgba(143, 163, 189, 0.3);
+  border-radius: 999px;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise-in {
+  animation: rise-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+.bar-grow {
+  transform-origin: left center;
+  animation: bar-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(245, 185, 66, 0.55);
+  }
+  70% {
+    opacity: 0.6;
+    box-shadow: 0 0 0 9px rgba(245, 185, 66, 0);
+  }
+}
+.pulse-dot {
+  animation: pulse-dot 2s ease-out infinite;
+}
+
+/* ---------- слайдер скорости ---------- */
+input[type="range"].speed-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f5b942 var(--fill, 55%), rgba(143, 163, 189, 0.25) var(--fill, 55%));
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"].speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffd98a;
+  border: 2px solid #0a1120;
+  box-shadow: 0 0 0 3px rgba(245, 185, 66, 0.35), 0 0 14px rgba(245, 185, 66, 0.7);
+  transition: transform 0.15s ease;
+}
+input[type="range"].speed-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+input[type="range"].speed-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffd98a;
+  border: 2px solid #0a1120;
+  box-shadow: 0 0 0 3px rgba(245, 185, 66, 0.35), 0 0 14px rgba(245, 185, 66, 0.7);
+}
+
+button {
+  font-family: inherit;
+}
