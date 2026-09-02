@@ -25,6 +25,8 @@ export interface CelestialBody {
   bandStops?: [string, string, string, string];
   /** визуальный радиус на схеме, px */
   vr: number;
+  /** ускорение свободного падения, м/с² */
+  gravity: number;
   orbit?: {
     /** радиус орбиты на схеме, px */
     r: number;
@@ -75,9 +77,11 @@ export const BODIES: Record<BodyId, CelestialBody> = {
     light: "#fff3c4",
     deep: "#e07a1f",
     vr: 34,
+    gravity: 274,
     stats: [
       { label: "Диаметр", value: "1 392 700 км" },
       { label: "Масса системы", value: "99,86 %" },
+      { label: "Гравитация", value: "274 м/с² · 28 g" },
       { label: "Поверхность", value: "+5 500 °C" },
       { label: "Ядро", value: "+15 000 000 °C" },
       { label: "Возраст", value: "4,6 млрд лет" },
@@ -99,11 +103,13 @@ export const BODIES: Record<BodyId, CelestialBody> = {
     light: "#d9c7b2",
     deep: "#5d5044",
     vr: 5.5,
+    gravity: 3.7,
     orbit: { r: 64, period: 88, start: 0.9 },
     stats: [
       { label: "Диаметр", value: "4 879 км" },
       { label: "Расстояние", value: "57,9 млн км · 0,39 а.е." },
       { label: "Орбитальный период", value: "88 земных суток" },
+      { label: "Гравитация", value: "3,7 м/с² · 0,38 g" },
       { label: "Длина суток", value: "59 земных суток" },
       { label: "Спутники", value: "0" },
       { label: "Температура", value: "−173…+427 °C" },
@@ -125,11 +131,13 @@ export const BODIES: Record<BodyId, CelestialBody> = {
     light: "#f7dfa8",
     deep: "#9c6a2c",
     vr: 8.5,
+    gravity: 8.87,
     orbit: { r: 92, period: 225, start: 2.7 },
     stats: [
       { label: "Диаметр", value: "12 104 км" },
       { label: "Расстояние", value: "108,2 млн км · 0,72 а.е." },
       { label: "Орбитальный период", value: "225 земных суток" },
+      { label: "Гравитация", value: "8,87 м/с² · 0,90 g" },
       { label: "Длина суток", value: "243 земных суток" },
       { label: "Спутники", value: "0" },
       { label: "Температура", value: "+464 °C" },
@@ -152,15 +160,17 @@ export const BODIES: Record<BodyId, CelestialBody> = {
     deep: "#123a75",
     atmosphere: "#7fc4ff",
     vr: 9,
+    gravity: 9.81,
     orbit: { r: 120, period: 365.25, start: 4.5 },
     hasMoon: true,
     stats: [
       { label: "Диаметр", value: "12 756 км" },
       { label: "Расстояние", value: "149,6 млн км · 1 а.е." },
       { label: "Орбитальный период", value: "365,25 суток" },
+      { label: "Гравитация", value: "9,81 м/с² · 1 g" },
       { label: "Длина суток", value: "23 ч 56 мин" },
       { label: "Спутники", value: "1 — Луна" },
-      { label: "Средняя температура", value: "+15 °C" },
+      { label: "Температура", value: "+15 °C" },
       { label: "Скорость по орбите", value: "29,8 км/с" },
     ],
     bars: [
@@ -179,14 +189,16 @@ export const BODIES: Record<BodyId, CelestialBody> = {
     light: "#f5a98c",
     deep: "#8a2f1d",
     vr: 7,
+    gravity: 3.71,
     orbit: { r: 150, period: 687, start: 5.7 },
     stats: [
       { label: "Диаметр", value: "6 792 км" },
       { label: "Расстояние", value: "227,9 млн км · 1,52 а.е." },
       { label: "Орбитальный период", value: "687 земных суток" },
+      { label: "Гравитация", value: "3,71 м/с² · 0,38 g" },
       { label: "Длина суток", value: "24 ч 37 мин" },
       { label: "Спутники", value: "2 — Фобос и Деймос" },
-      { label: "Средняя температура", value: "−63 °C" },
+      { label: "Температура", value: "−63 °C" },
       { label: "Скорость по орбите", value: "24,1 км/с" },
     ],
     bars: [
@@ -207,11 +219,13 @@ export const BODIES: Record<BodyId, CelestialBody> = {
     banded: true,
     bandStops: ["#e8c9a0", "#c08850", "#e3b586", "#a56f3e"],
     vr: 21,
+    gravity: 24.79,
     orbit: { r: 216, period: 4333, start: 1.6 },
     stats: [
       { label: "Диаметр", value: "142 984 км" },
       { label: "Расстояние", value: "778,6 млн км · 5,20 а.е." },
       { label: "Орбитальный период", value: "11,9 года · 4 333 сут" },
+      { label: "Гравитация", value: "24,79 м/с² · 2,53 g" },
       { label: "Длина суток", value: "9 ч 56 мин" },
       { label: "Спутники", value: "95" },
       { label: "Температура облаков", value: "−108 °C" },
@@ -235,12 +249,14 @@ export const BODIES: Record<BodyId, CelestialBody> = {
     banded: true,
     bandStops: ["#f3ddb0", "#d9b878", "#ead29c", "#c09a58"],
     vr: 18,
+    gravity: 10.44,
     orbit: { r: 278, period: 10759, start: 3.7 },
     hasRings: true,
     stats: [
       { label: "Диаметр", value: "120 536 км" },
       { label: "Расстояние", value: "1 433,5 млн км · 9,58 а.е." },
       { label: "Орбитальный период", value: "29,5 года · 10 759 сут" },
+      { label: "Гравитация", value: "10,44 м/с² · 1,06 g" },
       { label: "Длина суток", value: "10 ч 42 мин" },
       { label: "Спутники", value: "146" },
       { label: "Температура облаков", value: "−139 °C" },
@@ -262,11 +278,13 @@ export const BODIES: Record<BodyId, CelestialBody> = {
     light: "#c8f2ee",
     deep: "#2b7d80",
     vr: 13,
+    gravity: 8.69,
     orbit: { r: 348, period: 30687, start: 0.2 },
     stats: [
       { label: "Диаметр", value: "51 118 км" },
       { label: "Расстояние", value: "2 872,5 млн км · 19,2 а.е." },
       { label: "Орбитальный период", value: "84 года · 30 687 сут" },
+      { label: "Гравитация", value: "8,69 м/с² · 0,89 g" },
       { label: "Длина суток", value: "17 ч 14 мин" },
       { label: "Спутники", value: "28" },
       { label: "Температура облаков", value: "−197 °C" },
@@ -288,11 +306,13 @@ export const BODIES: Record<BodyId, CelestialBody> = {
     light: "#a9bcff",
     deep: "#1d2f7e",
     vr: 12.5,
+    gravity: 11.15,
     orbit: { r: 414, period: 60190, start: 5.1 },
     stats: [
       { label: "Диаметр", value: "49 528 км" },
       { label: "Расстояние", value: "4 495,1 млн км · 30,1 а.е." },
       { label: "Орбитальный период", value: "164,8 года · 60 190 сут" },
+      { label: "Гравитация", value: "11,15 м/с² · 1,14 g" },
       { label: "Длина суток", value: "16 ч 6 мин" },
       { label: "Спутники", value: "16" },
       { label: "Температура облаков", value: "−201 °C" },
