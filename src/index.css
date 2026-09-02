@@ -7,6 +7,8 @@
   --color-space-900: #0a1120;
   --color-space-800: #111b30;
   --color-ink-100: #e8eef7;
+  --color-ink-200: #c7d8ec;
+  --color-ink-300: #a9bdd6;
   --color-ink-400: #8fa3bd;
   --color-solar-300: #ffd98a;
   --color-solar-400: #f5b942;
@@ -244,4 +246,65 @@ input[type="range"].speed-slider::-moz-range-thumb {
 
 button {
   font-family: inherit;
+}
+
+/* ---------- вкладки и скролл панели ---------- */
+.scroll-slim {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(143, 163, 189, 0.35) transparent;
+}
+.scroll-slim::-webkit-scrollbar {
+  width: 6px;
+}
+.scroll-slim::-webkit-scrollbar-thumb {
+  background: rgba(143, 163, 189, 0.3);
+  border-radius: 999px;
+}
+
+.bar-fill {
+  transform-origin: left center;
+  animation: bar-grow 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---------- гравитационная лаборатория: яблоко ---------- */
+@keyframes apple-squash {
+  0% { transform: scale(1, 1); }
+  28% { transform: scale(1.3, 0.6); }
+  55% { transform: scale(0.9, 1.12); }
+  78% { transform: scale(1.06, 0.94); }
+  100% { transform: scale(1, 1); }
+}
+.apple-squash {
+  animation: apple-squash 0.55s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+}
+
+@keyframes dust-pop {
+  0% { opacity: 0.9; transform: translate(0, 0) scale(0.5); }
+  100% { opacity: 0; transform: translate(var(--dx, 0px), -18px) scale(1.2); }
+}
+
+@keyframes thud {
+  0%, 100% { transform: translate(0, 0); }
+  30% { transform: translate(0, 2px); }
+  60% { transform: translate(0, -1px); }
+}
+.scene-thud {
+  animation: thud 0.22s ease-out both;
+}
+
+@keyframes impact-flash {
+  0% { opacity: 0.8; transform: translateX(-50%) scale(0.5); }
+  100% { opacity: 0; transform: translateX(-50%) scale(1.6); }
+}
+.impact-flash {
+  animation: impact-flash 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star,
+  .shooting-star,
+  .sun-corona,
+  .halo-ring {
+    animation: none !important;
+  }
 }
